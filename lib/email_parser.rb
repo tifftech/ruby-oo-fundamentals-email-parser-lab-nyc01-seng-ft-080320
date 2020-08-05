@@ -1,21 +1,15 @@
-class EmailParser
 
-  attr_accessor :emails
+def parse 
+    csv_emails.split.collect do |address|
+      address.split(',') 
+    end.flatten.uniq 
+  end 
+end 
 
-  def initialize(emails)
-    @emails = emails
-  end
+emails1 = "asd@qw.com, per@er.org, Zaza@sugar.net"
+parser1 = EmailParser.new(emails1)
+parser1.parse 
 
-  def parse
-    email_array = []
-    email_array = @emails.split(/[,\s]/)
-    email_array = email_array.reject { |e| e == ""}
-    email_array.uniq
-  end
-
-end
-
-emails = "hpotter@hogwarts.org, he_who_must_not_be_named@riddleshouse.net"
-parser = EmailParser.new(emails)
-
-puts parser.parse
+emails2 = "asd@qw.com per@er.org per@er.org Zaza@sugar.net"
+parser2 = EmailParser.new(emails2)
+parser2.parse
